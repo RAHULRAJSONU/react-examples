@@ -1,10 +1,21 @@
 import React from 'react';
+import {useSelector, useDispatch } from 'react-redux';
 
 const App = props => {
+
+    const counter = useSelector((state)=>state.counter);
+
+    const dispatch = useDispatch();
+
     return(
         <>
-            <h1>Welcome to the landing page for react training Repository</h1>
-            <h3>Features are devided into multiple branch, Switch to appropriate and start hacking.</h3>
+            <div className="App">
+                <header className="App-header">
+                    <h1>{counter}</h1>
+                    <button onClick={(()=>dispatch({type: "INCREMENT"}))}>Increment</button>
+                    <button onClick={(()=>dispatch({type: "DECREMENT"}))}>Decrement</button>
+                </header>
+            </div>
         </>
     )
 }

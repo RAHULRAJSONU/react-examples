@@ -1,10 +1,18 @@
-import React from 'react';
+import React,{ useState, useMemo } from 'react';
+import Child from './components/child';
 
 const App = props => {
+    const [i, setI]=useState(0);
+    const memoChild = useMemo(()=>{
+        return <Child></Child>
+    },[i])
     return(
         <>
-            <h1>Welcome to the landing page for react training Repository</h1>
-            <h3>Features are devided into multiple branch, Switch to appropriate and start hacking.</h3>
+            <h1>UseMemo</h1>
+            <h3>i: {i}</h3>
+            <button onClick={()=>setI(i+1)}>Increment I</button>
+            <h3>Memo child</h3>
+            {memoChild}
         </>
     )
 }

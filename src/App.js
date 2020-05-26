@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
+import './App.css';
+import ChildComponent from './components/ChildComponent';
 
 const App = props => {
-    return(
-        <>
-            <h1>Welcome to the landing page for react training Repository</h1>
-            <h3>Features are devided into multiple branch, Switch to appropriate and start hacking.</h3>
-        </>
+    const [count, setCount] = useState(0);
+    const fetchData = useCallback((type) =>{
+        return fetch(`https://jsonplaceholder.typicode.com/${type}`)
+        .then(response => response.json())
+        .then(json => console.log(json));
+    },[]);
+
+    useEffect(() => {
+        fetchData("todos");
+    }, [fetchData]);
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <h2>{count}</h2>
+                <button onClick={() => setCount(count + 1)}>Increment</button>
+                <ChildComponent title="This is the title" fetchData={fetchData} />
+            </header>
+        </div>
     )
 }
 
